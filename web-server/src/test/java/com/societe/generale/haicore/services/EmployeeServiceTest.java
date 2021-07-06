@@ -25,7 +25,7 @@ public class EmployeeServiceTest {
     private EmployeeService employeeService;
 
     @Test
-    public void test_Create_User() {
+    public void test_create_emplooyee() {
         Employee emp = new Employee();
         emp.setFirstName("TestUser");
         Mockito.when(empRepo.save(Mockito.any())).thenReturn(emp);
@@ -50,6 +50,28 @@ public class EmployeeServiceTest {
         list.add(emp1);
         Mockito.when(empRepo.findAll()).thenReturn(list);
         Assert.assertEquals(2, list.size());
+    }
+
+    @Test
+    public void test_get_employee_ById() {
+        Employee emp = new Employee();
+        emp.setFirstName("TestUser");
+        Mockito.when(empRepo.findEmployeeById(Mockito.any())).thenReturn(emp);
+        Employee empData= employeeService.getEmployeeById("12");
+        Assert.assertEquals(empData.getFirstName(),"TestUser");
+    }
+
+    @Test
+    public void test_update_employee() {
+        Employee emp = new Employee();
+        emp.setFirstName("TestUser");
+        emp.setGender(Gender.FEMALE);
+        emp.setDepartment("Dept");
+        Mockito.when(empRepo.findEmployeeById(Mockito.any())).thenReturn(emp);
+        emp.setFirstName("UpdateUser");
+        Mockito.when(empRepo.save(Mockito.any())).thenReturn(emp);
+        Employee empData= employeeService.updateEmployee("12",emp);
+        Assert.assertEquals(empData.getFirstName(),"UpdateUser");
     }
 
 }
