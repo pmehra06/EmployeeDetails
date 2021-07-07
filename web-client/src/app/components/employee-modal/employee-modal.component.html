@@ -1,0 +1,80 @@
+<ngb-alert *ngIf="show" type="success" [dismissible]="false">Employee Details Updated Successfully</ngb-alert>
+<div class="modal-header">
+  <h4 class="modal-title">{{kind}} Employee Details</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-3 col-form-label">First Name</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="tempEmployee.firstName">
+      </div>
+    </div><br/>
+
+    <div class="form-group row">
+      <label for="lastName" class="col-sm-3 col-form-label">Last Name</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="tempEmployee.lastName">
+      </div>
+    </div><br/>
+
+    <div class="form-group row">
+      <label for="department" class="col-sm-3 col-form-label">Department</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="department" name="department" [(ngModel)]="tempEmployee.department">
+      </div>
+    </div><br/>
+
+    <div class="form-group row">
+      <label for="dob" class="col-sm-3 col-form-label">DOB</label>
+      <div class="col-sm-8">
+        <input class="form-control" placeholder="yyyy-mm-dd" id="dob" name="dp" [(ngModel)]="tempDob" ngbDatepicker #d="ngbDatepicker">
+      </div>
+      <div class="col-sm-1" style="padding-left: 0px">
+        <button class="btn" (click)="d.toggle()" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+            <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+            <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+          </svg>
+        </button>
+      </div>
+    </div><br/>
+
+    <fieldset class="form-group">
+      <div class="row">
+        <legend class="col-form-label col-sm-3 pt-0">Gender</legend>
+        <div class="col-sm-9">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="male" value="MALE" [(ngModel)]="tempEmployee.gender">
+            <label class="form-check-label" for="male">
+              Male
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="female" value="FEMALE" [(ngModel)]="tempEmployee.gender" #gender>
+            <label class="form-check-label" for="female">
+              Female
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <input class="form-check-input" type="radio" name="gender" id="other" value="OTHER" [(ngModel)]="tempEmployee.gender" #gender>
+            <label class="form-check-label" for="other">
+              Other
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </fieldset>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(name)">Cancel</button>
+  <button type="button" class="btn btn-outline-primary" (click)="updateEmployee()">
+    <span *ngIf="showSpinner" aria-hidden="true" class="spinner-border spinner-border-sm" role="status">
+    </span>
+    Save</button>
+</div>
